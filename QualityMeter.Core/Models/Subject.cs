@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace QualityMeter.Core.Models
 {
+    [Table("tb_Subjects")]
     public class Subject : CommonBaseBusinessEntity
     {
         [Required]
