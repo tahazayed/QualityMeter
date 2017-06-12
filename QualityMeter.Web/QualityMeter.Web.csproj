@@ -4383,6 +4383,7 @@
     <Content Include="Content\vendors\validator\.bower.json" />
     <Content Include="Content\vendors\validator\README.md" />
     <Content Include="Content\vendors\validator\validator.jquery.json" />
+    <None Include="Properties\PublishProfiles\publishLocal.pubxml" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -4444,6 +4445,16 @@
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-3.1.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.1.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\QualityMeter.Core\QualityMeter.Core.csproj">
+      <Project>{491beccb-fa0f-4e92-bc60-68545878ffe4}</Project>
+      <Name>QualityMeter.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\QualityMeter.Infrastructure\QualityMeter.Infrastructure.csproj">
+      <Project>{f796f3e1-03c1-421b-ab7f-241820c06495}</Project>
+      <Name>QualityMeter.Infrastructure</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
