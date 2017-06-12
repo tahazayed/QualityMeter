@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace QualityMeter.Models
+namespace QualityMeter.Web.Models
 {
     public class ExternalLoginConfirmationViewModel
     {

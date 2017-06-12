@@ -1,8 +1,8 @@
 ﻿using Microsoft.Owin;
 using Owin;
 
-[assembly: OwinStartupAttribute(typeof(QualityMeter.Startup))]
-namespace QualityMeter
+[assembly: OwinStartupAttribute(typeof(QualityMeter.Web.Startup))]
+namespace QualityMeter.Web
 {
     public partial class Startup
     {
