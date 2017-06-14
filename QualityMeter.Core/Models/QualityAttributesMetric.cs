@@ -55,14 +55,14 @@ namespace QualityMeter.Core.Models
         public string RuteBased { get; set; }
 
         [Index]
-        public Guid RelatedToId { get; set; }
+        public Guid? RelatedToId { get; set; }
 
 
         [ForeignKey(nameof(RelatedToId))]
         public virtual QualityAttributesMetric RelatedTo { get; set; }
 
         [Index]
-        public Guid AganistId { get; set; }
+        public Guid? AganistId { get; set; }
 
 
         [ForeignKey(nameof(AganistId))]
