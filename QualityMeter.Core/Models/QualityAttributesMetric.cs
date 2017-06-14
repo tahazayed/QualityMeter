@@ -17,22 +17,6 @@ namespace QualityMeter.Core.Models
 
         [Index]
         [Required]
-        public Guid FactorId { get; set; }
-
-
-        [ForeignKey(nameof(FactorId))]
-        public virtual Factor Factor { get; set; }
-
-        [Index]
-        [Required]
-        public Guid SubjectId { get; set; }
-
-
-        [ForeignKey(nameof(SubjectId))]
-        public virtual Subject Subject { get; set; }
-
-        [Index]
-        [Required]
         public Guid CriteriaId { get; set; }
 
 

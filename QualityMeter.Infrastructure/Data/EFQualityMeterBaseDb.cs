@@ -31,9 +31,8 @@ namespace QualityMeter.Infrastructure.Data
 
             modelBuilder.Entity<Factor>().HasRequired(i => i.Subject).WithMany().WillCascadeOnDelete(false);
 
-            modelBuilder.Entity<QualityAttributesMetric>().HasRequired(i => i.Factor).WithMany().WillCascadeOnDelete(false);
+
             modelBuilder.Entity<QualityAttributesMetric>().HasRequired(i => i.Criteria).WithMany().WillCascadeOnDelete(false);
-            modelBuilder.Entity<QualityAttributesMetric>().HasRequired(i => i.Subject).WithMany().WillCascadeOnDelete(false);
 
             base.OnModelCreating(modelBuilder);
         }
