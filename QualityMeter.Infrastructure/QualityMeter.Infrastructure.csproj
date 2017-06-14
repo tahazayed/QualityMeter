@@ -50,6 +50,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Data\EFQualityMeterBaseDb.cs" />
+    <Compile Include="Data\QualityAttributesMetricsRepository.cs" />
+    <Compile Include="Data\FactorsRepository.cs" />
+    <Compile Include="Data\CriteriasRepository.cs" />
+    <Compile Include="Data\SubjectsRepository.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
