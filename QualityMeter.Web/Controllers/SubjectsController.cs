@@ -11,13 +11,13 @@ namespace QualityMeter.Web.Controllers
 {
     public class SubjectsController : Controller
     {
-        private SubjectService oSubjectService = new SubjectService(new SubjectsRepository(), new DebugLogger());
+        private readonly SubjectService _oSubjectService = new SubjectService(new SubjectsRepository(), new DebugLogger());
 
 
         // GET: Subjects
         public ActionResult Index()
         {
-            return View(oSubjectService.GetAll().ToList());
+            return View(_oSubjectService.GetAll().ToList());
         }
 
         // GET: Subjects/Details/5
@@ -27,7 +27,7 @@ namespace QualityMeter.Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Subject subject = oSubjectService.GetById(id.Value);
+            Subject subject = _oSubjectService.GetById(id.Value);
             if (subject == null)
             {
                 return HttpNotFound();
@@ -54,7 +54,7 @@ namespace QualityMeter.Web.Controllers
 
                 subject.Id = Guid.NewGuid();
 
-                oSubjectService.Add(subject);
+                _oSubjectService.Add(subject);
 
                 return RedirectToAction("Index");
             }
@@ -69,7 +69,7 @@ namespace QualityMeter.Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Subject subject = oSubjectService.GetById(id.Value);
+            Subject subject = _oSubjectService.GetById(id.Value);
             if (subject == null)
             {
                 return HttpNotFound();
@@ -87,7 +87,7 @@ namespace QualityMeter.Web.Controllers
             if (ModelState.IsValid)
             {
                 subject.LastUpdated = DateTime.Now;
-                oSubjectService.Update(subject);
+                _oSubjectService.Update(subject);
 
                 return RedirectToAction("Index");
             }
@@ -101,7 +101,7 @@ namespace QualityMeter.Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Subject subject = oSubjectService.GetById(id.Value);
+            Subject subject = _oSubjectService.GetById(id.Value);
             if (subject == null)
             {
                 return HttpNotFound();
@@ -114,7 +114,7 @@ namespace QualityMeter.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(Guid id)
         {
-            oSubjectService.Delete(id);
+            _oSubjectService.Delete(id);
             return RedirectToAction("Index");
         }
 
