@@ -17,7 +17,7 @@ namespace QualityMeter.Web.Controllers
         // GET: Subjects
         public ActionResult Index()
         {
-            return View(_oSubjectService.GetAll().ToList());
+            return View(_oSubjectService.GetAll(sort: "Name").ToList());
         }
 
         // GET: Subjects/Details/5
