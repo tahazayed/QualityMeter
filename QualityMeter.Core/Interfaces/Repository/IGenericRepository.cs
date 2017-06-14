@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Linq.Expressions;
 
-namespace QualityMeter.Core.Interfaces
+namespace QualityMeter.Core.Interfaces.Repository
 {
     public interface IGenericRepository<T> where T : class
     {

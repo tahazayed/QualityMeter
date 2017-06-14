@@ -3,7 +3,7 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 
-namespace QualityMeter.Core.Interfaces
+namespace QualityMeter.Core.Interfaces.Repository
 {
     public abstract class GenericRepository<C, T> : IGenericRepository<T> where T : class where C : DbContext, new()
     {

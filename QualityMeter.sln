@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QualityMeter.Core", "Qualit
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QualityMeter.Infrastructure", "QualityMeter.Infrastructure\QualityMeter.Infrastructure.csproj", "{F796F3E1-03C1-421B-AB7F-241820C06495}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QualityMeter.Infrastructure.Common", "QualityMeter.Infrastructure.Common\QualityMeter.Infrastructure.Common.csproj", "{626AD4B8-9A02-4911-8C51-656A840BA370}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{F796F3E1-03C1-421B-AB7F-241820C06495}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F796F3E1-03C1-421B-AB7F-241820C06495}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F796F3E1-03C1-421B-AB7F-241820C06495}.Release|Any CPU.Build.0 = Release|Any CPU
+		{626AD4B8-9A02-4911-8C51-656A840BA370}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{626AD4B8-9A02-4911-8C51-656A840BA370}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{626AD4B8-9A02-4911-8C51-656A840BA370}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{626AD4B8-9A02-4911-8C51-656A840BA370}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
