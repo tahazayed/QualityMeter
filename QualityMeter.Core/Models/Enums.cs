@@ -6,10 +6,10 @@
         Product = 2
     }
 
-    public enum Quantification
-    {
-        Objective = 'O',
-        Subjective = 'S',
-        Non = 'N'
-    }
+    //public enum Quantification
+    //{
+    //    Objective = 'O',
+    //    Subjective = 'S',
+    //    Non = 'N'
+    //}
 }
