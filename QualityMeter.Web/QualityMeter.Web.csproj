@@ -188,6 +188,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\FactorsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\SubjectsController.cs" />
@@ -4442,6 +4443,11 @@
     <Content Include="Views\Subjects\Details.cshtml" />
     <Content Include="Views\Subjects\Edit.cshtml" />
     <Content Include="Views\Subjects\Index.cshtml" />
+    <Content Include="Views\Factors\Create.cshtml" />
+    <Content Include="Views\Factors\Delete.cshtml" />
+    <Content Include="Views\Factors\Details.cshtml" />
+    <Content Include="Views\Factors\Edit.cshtml" />
+    <Content Include="Views\Factors\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
