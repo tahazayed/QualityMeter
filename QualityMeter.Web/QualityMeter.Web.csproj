@@ -190,6 +190,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\SubjectsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -4436,6 +4437,11 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Subjects\Create.cshtml" />
+    <Content Include="Views\Subjects\Delete.cshtml" />
+    <Content Include="Views\Subjects\Details.cshtml" />
+    <Content Include="Views\Subjects\Edit.cshtml" />
+    <Content Include="Views\Subjects\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -4450,6 +4456,10 @@
     <ProjectReference Include="..\QualityMeter.Core\QualityMeter.Core.csproj">
       <Project>{491beccb-fa0f-4e92-bc60-68545878ffe4}</Project>
       <Name>QualityMeter.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\QualityMeter.Infrastructure.Common\QualityMeter.Infrastructure.Common.csproj">
+      <Project>{626ad4b8-9a02-4911-8c51-656a840ba370}</Project>
+      <Name>QualityMeter.Infrastructure.Common</Name>
     </ProjectReference>
     <ProjectReference Include="..\QualityMeter.Infrastructure\QualityMeter.Infrastructure.csproj">
       <Project>{f796f3e1-03c1-421b-ab7f-241820c06495}</Project>
