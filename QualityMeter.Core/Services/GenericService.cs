@@ -11,7 +11,6 @@ using System.Net.Http;
 using System.Web;
 using System.Web.Http;
 using System.Web.Http.Controllers;
-using System.Web.Http.Dispatcher;
 using System.Web.Http.Hosting;
 using System.Web.Http.Routing;
 
@@ -183,15 +182,18 @@ namespace QualityMeter.Core.Services
 
             request.Properties[HttpPropertyKeys.HttpRouteDataKey] = routeData;
             controllerContext.RouteData = routeData;
+            string actionName = routeData.Values["action"].ToString();
+            string controllerName = routeData.Values["controller"].ToString();
+            return actionName;
+            //// get controller type
+            //var controllerDescriptor = new DefaultHttpControllerSelector(config).SelectController(request);
+            ////var controllerName = controllerDescriptor.ControllerName;
+            //controllerContext.ControllerDescriptor = controllerDescriptor;
 
-            // get controller type
-            var controllerDescriptor = new DefaultHttpControllerSelector(config).SelectController(request);
-            //var controllerName = controllerDescriptor.ControllerName;
-            controllerContext.ControllerDescriptor = controllerDescriptor;
-
-            // get action name
-            var actionMapping = new ApiControllerActionSelector().SelectAction(controllerContext);
-            return actionMapping.ActionName;
+            //// get action name
+            //var actionMapping = new ApiControllerActionSelector().SelectAction(controllerContext);
+            //return actionMapping.ActionName;
         }
+
     }
 }

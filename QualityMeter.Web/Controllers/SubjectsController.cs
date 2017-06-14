@@ -1,28 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Linq;
-using System.Net;
-using System.Web;
-using System.Web.Mvc;
-using QualityMeter.Core.Models;
+﻿using QualityMeter.Core.Models;
 using QualityMeter.Core.Services;
 using QualityMeter.Infrastructure.Common.Services;
 using QualityMeter.Infrastructure.Data;
+using System;
+using System.Linq;
+using System.Net;
+using System.Web.Mvc;
 
 namespace QualityMeter.Web.Controllers
 {
     public class SubjectsController : Controller
     {
-        private SubjectService oSubjectService = new SubjectService(new SubjectsRepository(),new DebugLogger());
+        private SubjectService oSubjectService = new SubjectService(new SubjectsRepository(), new DebugLogger());
 
-        private EfQualityMeterBaseDb db = new EfQualityMeterBaseDb();
 
         // GET: Subjects
         public ActionResult Index()
         {
-            return View(db.Subjects.ToList());
+            return View(oSubjectService.GetAll().ToList());
         }
 
         // GET: Subjects/Details/5
@@ -32,7 +27,7 @@ namespace QualityMeter.Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Subject subject = db.Subjects.Find(id);
+            Subject subject = oSubjectService.GetById(id.Value);
             if (subject == null)
             {
                 return HttpNotFound();
@@ -43,7 +38,7 @@ namespace QualityMeter.Web.Controllers
         // GET: Subjects/Create
         public ActionResult Create()
         {
-            var subject=new Subject();
+            Subject subject = new Subject();
             return View(subject);
         }
 
@@ -56,9 +51,11 @@ namespace QualityMeter.Web.Controllers
         {
             if (ModelState.IsValid)
             {
+
                 subject.Id = Guid.NewGuid();
-                db.Subjects.Add(subject);
-                db.SaveChanges();
+
+                oSubjectService.Add(subject);
+
                 return RedirectToAction("Index");
             }
 
@@ -72,7 +69,7 @@ namespace QualityMeter.Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Subject subject = db.Subjects.Find(id);
+            Subject subject = oSubjectService.GetById(id.Value);
             if (subject == null)
             {
                 return HttpNotFound();
@@ -89,8 +86,9 @@ namespace QualityMeter.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(subject).State = EntityState.Modified;
-                db.SaveChanges();
+                subject.LastUpdated = DateTime.Now;
+                oSubjectService.Update(subject);
+
                 return RedirectToAction("Index");
             }
             return View(subject);
@@ -103,7 +101,7 @@ namespace QualityMeter.Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Subject subject = db.Subjects.Find(id);
+            Subject subject = oSubjectService.GetById(id.Value);
             if (subject == null)
             {
                 return HttpNotFound();
@@ -116,9 +114,7 @@ namespace QualityMeter.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(Guid id)
         {
-            Subject subject = db.Subjects.Find(id);
-            db.Subjects.Remove(subject);
-            db.SaveChanges();
+            oSubjectService.Delete(id);
             return RedirectToAction("Index");
         }
 
@@ -126,7 +122,7 @@ namespace QualityMeter.Web.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                // oSubjectService.Dispose();
             }
             base.Dispose(disposing);
         }
