@@ -1,4 +1,5 @@
-﻿using QualityMeter.Core.Interfaces;
+﻿using QualityMeter.Core.Extensions;
+using QualityMeter.Core.Interfaces;
 using QualityMeter.Core.Interfaces.Repository;
 using QualityMeter.Core.Interfaces.Service;
 using QualityMeter.Core.Models;
@@ -13,7 +14,6 @@ using System.Web.Http.Controllers;
 using System.Web.Http.Dispatcher;
 using System.Web.Http.Hosting;
 using System.Web.Http.Routing;
-using QualityMeter.Core.Extensions;
 
 namespace QualityMeter.Core.Services
 {
