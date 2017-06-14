@@ -13,20 +13,27 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Factor.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Factor.Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
+            Criteria
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.Name)
         </dd>
+        <dt>
+            Factor
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Factor.Name)
+        </dd>
+        <dt>
+            Subject
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Factor.Subject.Name)
+        </dd>
+
 
         <dt>
             @Html.DisplayNameFor(model => model.Description)
@@ -52,13 +59,6 @@
             @Html.DisplayFor(model => model.LastUpdated)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.RowVersion)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.RowVersion)
-        </dd>
 
     </dl>
 

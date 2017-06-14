@@ -9,7 +9,7 @@ using System.Web.Mvc;
 
 namespace QualityMeter.Web.Controllers
 {
-    public class CriteriaController : Controller
+    public class CriteriasController : Controller
     {
         private readonly CriteriaService _oCriteriaService = new CriteriaService(new CriteriasRepository(), new DebugLogger());
         private readonly FactorService _oFactorService = new FactorService(new FactorsRepository(), new DebugLogger());
