@@ -88,10 +88,10 @@
         </div>
 
         <div class="form-group">
-            <label class="control-label col-md-2" for="RuteBased">Rute Based</label>
+            <label class="control-label col-md-2" for="RouteBased">Route Based</label>
             <div class="col-md-10">
-                @Html.EditorFor(model => model.RuteBased, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.RuteBased, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.RouteBased, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.RouteBased, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -104,10 +104,10 @@
         </div>
 
         <div class="form-group">
-            <label class="control-label col-md-2" for="AganistId">Aganist</label>
+            <label class="control-label col-md-2" for="AgainstId">Against</label>
             <div class="col-md-10">
-                @Html.DropDownList("AganistId", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.AganistId, "", new { @class = "text-danger" })
+                @Html.DropDownList("AgainstId", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.AgainstId, "", new { @class = "text-danger" })
             </div>
         </div>
 

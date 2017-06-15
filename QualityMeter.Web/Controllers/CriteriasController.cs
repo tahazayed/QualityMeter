@@ -77,8 +77,8 @@ namespace QualityMeter.Web.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.SubjectId = new SelectList(_oSubjectService.GetAll(sort: "Name"), "Id", "Name");
-            ViewBag.FactorId = new SelectList(_oFactorService.GetAll(sort: "Name"), "Id", "Name");
+            ViewBag.SubjectId = new SelectList(_oSubjectService.GetAll(sort: "Name"), "Id", "Name", criteria.Factor.Subject.Id);
+            ViewBag.FactorId = new SelectList(_oFactorService.GetAll(sort: "Name"), "Id", "Name", criteria.FactorId);
             return View(criteria);
         }
 

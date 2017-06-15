@@ -12,15 +12,28 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Aganist.Name)
+            Quality Attributes Metric
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Aganist.Name)
+            @Html.DisplayFor(model => model.Name)
         </dd>
-
         <dt>
-            @Html.DisplayNameFor(model => model.Criteria.Name)
+            Subject
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Criteria.Factor.Subject.Name)
+        </dd>
+        <dt>
+            Factor
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Criteria.Factor.Name)
+        </dd>
+        <dt>
+            Criteria
         </dt>
 
         <dd>
@@ -28,20 +41,22 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.RelatedTo.Name)
+            Against
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Against.Name)
+        </dd>
+
+        <dt>
+            Related To
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.RelatedTo.Name)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
 
         <dt>
             @Html.DisplayNameFor(model => model.Description)
@@ -52,7 +67,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.TypeOfMetric)
+            Type Of Metric
         </dt>
 
         <dd>
@@ -68,7 +83,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.StandardValue)
+            Standard Value
         </dt>
 
         <dd>
@@ -76,7 +91,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.EvaluationValue)
+            Evaluation Value
         </dt>
 
         <dd>
@@ -84,11 +99,11 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.RuteBased)
+            Route Based
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.RuteBased)
+            @Html.DisplayFor(model => model.RouteBased)
         </dd>
 
         <dt>
@@ -105,14 +120,6 @@
 
         <dd>
             @Html.DisplayFor(model => model.LastUpdated)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.RowVersion)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.RowVersion)
         </dd>
 
     </dl>

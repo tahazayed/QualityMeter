@@ -47,7 +47,7 @@ namespace QualityMeter.Web.Controllers
             ViewBag.SubjectId = new SelectList(_oSubjectService.GetAll(sort: "Name"), "Id", "Name");
             ViewBag.FactorId = new SelectList(_oFactorService.GetAll(sort: "Name"), "Id", "Name");
             ViewBag.CriteriaId = new SelectList(_oCriteriaService.GetAll(sort: "Name"), "Id", "Name");
-            ViewBag.AganistId = new SelectList(_oQualityAttributesMetricService.GetAll(sort: "Name"), "Id", "Name");
+            ViewBag.AgainstId = new SelectList(_oQualityAttributesMetricService.GetAll(sort: "Name"), "Id", "Name");
 
             ViewBag.RelatedToId = new SelectList(_oQualityAttributesMetricService.GetAll(sort: "Name"), "Id", "Name");
             return View(qualityAttributesMetric);
@@ -58,7 +58,7 @@ namespace QualityMeter.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,Description,CriteriaId,TypeOfMetric,Quantification,StandardValue,EvaluationValue,RuteBased,RelatedToId,AganistId,CreationDate,LastUpdated,RowVersion")] QualityAttributesMetric qualityAttributesMetric)
+        public ActionResult Create([Bind(Include = "Id,Name,Description,CriteriaId,TypeOfMetric,Quantification,StandardValue,EvaluationValue,RouteBased,RelatedToId,AgainstId,CreationDate,LastUpdated,RowVersion")] QualityAttributesMetric qualityAttributesMetric)
         {
             if (ModelState.IsValid)
             {
@@ -70,7 +70,7 @@ namespace QualityMeter.Web.Controllers
             ViewBag.SubjectId = new SelectList(_oSubjectService.GetAll(sort: "Name"), "Id", "Name");
             ViewBag.FactorId = new SelectList(_oFactorService.GetAll(sort: "Name"), "Id", "Name");
             ViewBag.CriteriaId = new SelectList(_oCriteriaService.GetAll(sort: "Name"), "Id", "Name");
-            ViewBag.AganistId = new SelectList(_oQualityAttributesMetricService.GetAll(sort: "Name"), "Id", "Name");
+            ViewBag.AgainstId = new SelectList(_oQualityAttributesMetricService.GetAll(sort: "Name"), "Id", "Name");
 
             ViewBag.RelatedToId = new SelectList(_oQualityAttributesMetricService.GetAll(sort: "Name"), "Id", "Name");
 
@@ -92,7 +92,7 @@ namespace QualityMeter.Web.Controllers
             ViewBag.SubjectId = new SelectList(_oSubjectService.GetAll(sort: "Name"), "Id", "Name");
             ViewBag.FactorId = new SelectList(_oFactorService.GetAll(sort: "Name"), "Id", "Name");
             ViewBag.CriteriaId = new SelectList(_oCriteriaService.GetAll(sort: "Name"), "Id", "Name");
-            ViewBag.AganistId = new SelectList(_oQualityAttributesMetricService.GetAll(sort: "Name").Where(x => x.Id != id.Value), "Id", "Name", qualityAttributesMetric.AganistId);
+            ViewBag.AgainstId = new SelectList(_oQualityAttributesMetricService.GetAll(sort: "Name").Where(x => x.Id != id.Value), "Id", "Name", qualityAttributesMetric.AgainstId);
 
             ViewBag.RelatedToId = new SelectList(_oQualityAttributesMetricService.GetAll(sort: "Name").Where(x => x.Id != id.Value), "Id", "Name", qualityAttributesMetric.RelatedToId);
             return View(qualityAttributesMetric);
@@ -103,7 +103,7 @@ namespace QualityMeter.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,Description,CriteriaId,TypeOfMetric,Quantification,StandardValue,EvaluationValue,RuteBased,RelatedToId,AganistId,CreationDate,LastUpdated,RowVersion")] QualityAttributesMetric qualityAttributesMetric)
+        public ActionResult Edit([Bind(Include = "Id,Name,Description,CriteriaId,TypeOfMetric,Quantification,StandardValue,EvaluationValue,RouteBased,RelatedToId,AgainstId,CreationDate,LastUpdated,RowVersion")] QualityAttributesMetric qualityAttributesMetric)
         {
             if (ModelState.IsValid)
             {
@@ -114,7 +114,7 @@ namespace QualityMeter.Web.Controllers
             ViewBag.SubjectId = new SelectList(_oSubjectService.GetAll(sort: "Name"), "Id", "Name");
             ViewBag.FactorId = new SelectList(_oFactorService.GetAll(sort: "Name"), "Id", "Name");
             ViewBag.CriteriaId = new SelectList(_oCriteriaService.GetAll(sort: "Name"), "Id", "Name");
-            ViewBag.AganistId = new SelectList(_oQualityAttributesMetricService.GetAll(sort: "Name").Where(x => x.Id != qualityAttributesMetric.Id), "Id", "Name", qualityAttributesMetric.AganistId);
+            ViewBag.AgainstId = new SelectList(_oQualityAttributesMetricService.GetAll(sort: "Name").Where(x => x.Id != qualityAttributesMetric.Id), "Id", "Name", qualityAttributesMetric.AgainstId);
 
             ViewBag.RelatedToId = new SelectList(_oQualityAttributesMetricService.GetAll(sort: "Name").Where(x => x.Id != qualityAttributesMetric.Id), "Id", "Name", qualityAttributesMetric.RelatedToId);
 

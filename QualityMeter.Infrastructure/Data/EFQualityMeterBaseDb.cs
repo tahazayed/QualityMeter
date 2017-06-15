@@ -25,9 +25,9 @@ namespace QualityMeter.Infrastructure.Data
                 HasForeignKey(m => m.RelatedToId);
 
             modelBuilder.Entity<QualityAttributesMetric>().
-                HasOptional(e => e.Aganist).
+                HasOptional(e => e.Against).
                 WithMany().
-                HasForeignKey(m => m.AganistId);
+                HasForeignKey(m => m.AgainstId);
 
             modelBuilder.Entity<Factor>().HasRequired(i => i.Subject).WithMany().WillCascadeOnDelete(false);
 

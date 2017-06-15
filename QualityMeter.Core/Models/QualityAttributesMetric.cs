@@ -37,7 +37,7 @@ namespace QualityMeter.Core.Models
         public float EvaluationValue { get; set; }
 
         [StringLength(30)]
-        public string RuteBased { get; set; }
+        public string RouteBased { get; set; }
 
         [Index]
         public Guid? RelatedToId { get; set; }
@@ -47,11 +47,11 @@ namespace QualityMeter.Core.Models
         public virtual QualityAttributesMetric RelatedTo { get; set; }
 
         [Index]
-        public Guid? AganistId { get; set; }
+        public Guid? AgainstId { get; set; }
 
 
-        [ForeignKey(nameof(AganistId))]
-        public virtual QualityAttributesMetric Aganist { get; set; }
+        [ForeignKey(nameof(AgainstId))]
+        public virtual QualityAttributesMetric Against { get; set; }
     }
 
 }
