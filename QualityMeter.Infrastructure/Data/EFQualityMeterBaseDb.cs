@@ -17,6 +17,9 @@ namespace QualityMeter.Infrastructure.Data
         public DbSet<Criteria> Criterias { get; set; }
         public DbSet<QualityAttributesMetric> QualityAttributesMetrics { get; set; }
 
+        public DbSet<Application> Applications { get; set; }
+        public DbSet<ApplicationEvaluation> ApplicationEvaluations { get; set; }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<QualityAttributesMetric>().

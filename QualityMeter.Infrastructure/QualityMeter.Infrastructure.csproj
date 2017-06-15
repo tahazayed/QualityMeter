@@ -49,6 +49,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Data\ApplicationEvaluationsRepository.cs" />
+    <Compile Include="Data\ApplicationsRepository.cs" />
     <Compile Include="Data\EFQualityMeterBaseDb.cs" />
     <Compile Include="Data\QualityAttributesMetricsRepository.cs" />
     <Compile Include="Data\FactorsRepository.cs" />
