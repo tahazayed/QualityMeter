@@ -1,14 +1,14 @@
 ﻿@model IEnumerable<QualityMeter.Core.Models.ApplicationEvaluation>
 
-@{
-    ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<h2>Index</h2>
-
+@Styles.Render("~/Content/css")
+@Scripts.Render("~/bundles/modernizr")
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/jqueryval")
+@Scripts.Render("~/bundles/bootstrap")
+@Scripts.Render("~/Content/js/ModalDialog.js")
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Add Application Evaluation", "Create", new { applicationId = ViewBag.applicationId }, new { btnName = "btnCreateItem", @class = "btn btn-default btn-xs" })
 </p>
 <table class="table">
     <tr>
@@ -36,35 +36,119 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Application.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.QualityAttributesMetric.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.QualityValue)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.UserValue)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CreationDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.LastUpdated)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.RowVersion)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Application.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.QualityAttributesMetric.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.QualityValue)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserValue)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreationDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastUpdated)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RowVersion)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { btnName = "btnEditItem", @class = "btn btn-default btn-xs" })
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { btnName = "btnDeleteItem", @class = "btn btn-default btn-xs" })
+            </td>
+        </tr>
+    }
 
 </table>
+<script type="text/javascript">
+    $(document)
+        .ready(function () {
+            $(function () {
+                $.ajaxSetup({ cache: false });
+
+                setDialogLink($('a[btnName=btnCreateItem]'),
+                    '',
+                    500,
+                    600,
+                    "detailFrame",
+                    "/ApplicationEvaluations/Index?applicationId=@ViewBag.applicationId");
+                setDialogLink($('a[btnName=btnEditItem]'),
+                    '',
+                    500,
+                    600,
+                    "detailFrame",
+                    "/ApplicationEvaluations/Index?applicationId=@ViewBag.applicationId");
+
+                $('a[btnName=btnDeleteItem]')
+                    .click(function (e) {
+                        e.preventDefault();
+                        var confirmResult = confirm("Are you sure?");
+                        if (confirmResult) {
+                            $('#detailFrame').mask("waiting ...");
+
+                            $.ajax(
+                            {
+                                url: this.href,
+                                type: 'POST',
+                                data: JSON.stringify({}),
+                                dataType: 'json',
+                                traditional: true,
+                                contentType: "application/json; charset=utf-8",
+                                success: function (data) {
+                                    if (data.success) {
+                                        $('#detailFrame')
+                                            .load("/ApplicationEvaluations/Index?OrderID=@ViewBag.OrderID");
+                                    } else {
+
+                                        alert(data.errormessage);
+                                    }
+                                    $('#detailFrame').unmask("waiting ...");
+
+                                },
+                                error: function (data) {
+                                    alert("An error has occured!!!");
+                                    $('#detailFrame').unmask("waiting ...");
+                                }
+
+                            });
+                        }
+
+                    });
+
+
+                $('#ApplicationEvaluationsPager')
+                    .on('click',
+                        'a',
+                        function (e) {
+                            e.preventDefault();
+                            $('#detailFrame').mask("waiting ...");
+                            $.ajax({
+                                url: this.href,
+                                type: 'GET',
+                                cache: false,
+                                success: function (result) {
+                                    $('#detailFrame').unmask("waiting ...");
+                                    $('#detailFrame').html(result);
+
+                                }
+                            });
+
+                        });
+
+            });
+
+
+        });
+
+
+
+
+</script>

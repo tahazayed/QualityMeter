@@ -20,9 +20,10 @@ namespace QualityMeter.Web.Controllers
         private EfQualityMeterBaseDb db = new EfQualityMeterBaseDb();
 
         // GET: ApplicationEvaluations
-        public ActionResult Index()
+        public ActionResult Index(Guid applicationId)
         {
-            return View(_oApplicationEvaluationService.GetAll(sort: "Id").ToList());
+            ViewBag.applicationId = applicationId;
+            return PartialView(_oApplicationEvaluationService.GetAll(sort: "Id").Where(x => x.ApplicationId == applicationId).ToList());
         }
 
         // GET: ApplicationEvaluations/Details/5
@@ -41,11 +42,13 @@ namespace QualityMeter.Web.Controllers
         }
 
         // GET: ApplicationEvaluations/Create
-        public ActionResult Create()
+        public ActionResult Create(Guid applicationId)
         {
+            ApplicationEvaluation applicationEvaluation = new ApplicationEvaluation { ApplicationId = applicationId };
+
             ViewBag.ApplicationId = new SelectList(_oApplicationService.GetAll(sort: "Name").ToList(), "Id", "Name");
             ViewBag.QualityAttributesMetricId = new SelectList(_oQualityAttributesMetricService.GetAll(sort: "Name").ToList(), "Id", "Name");
-            return View();
+            return PartialView(applicationEvaluation);
         }
 
         // POST: ApplicationEvaluations/Create
@@ -53,19 +56,19 @@ namespace QualityMeter.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,QualityAttributesMetricId,ApplicationId,QualityValue,UserValue,CreationDate,LastUpdated,RowVersion")] ApplicationEvaluation applicationEvaluation)
+        public ActionResult Create([Bind(Include = "Id,QualityAttributesMetricId,ApplicationId,QualityValue,UserValue,CreationDate,LastUpdated,RowVersion,ApplicationId")] ApplicationEvaluation applicationEvaluation)
         {
             if (ModelState.IsValid)
             {
                 applicationEvaluation.Id = Guid.NewGuid();
                 db.ApplicationEvaluations.Add(applicationEvaluation);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return Json(new { success = true });
             }
 
             ViewBag.ApplicationId = new SelectList(db.Applications, "Id", "Name", applicationEvaluation.ApplicationId);
             ViewBag.QualityAttributesMetricId = new SelectList(db.QualityAttributesMetrics, "Id", "Name", applicationEvaluation.QualityAttributesMetricId);
-            return View(applicationEvaluation);
+            return PartialView(applicationEvaluation);
         }
 
         // GET: ApplicationEvaluations/Edit/5
