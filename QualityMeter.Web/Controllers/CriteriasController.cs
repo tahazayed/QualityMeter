@@ -123,7 +123,12 @@ namespace QualityMeter.Web.Controllers
             _oCriteriaService.Delete(id);
             return RedirectToAction("Index");
         }
+        [HttpPost]
+        public ActionResult GetCriterias(Guid factorId)
+        {
 
+            return Json(new SelectList(_oCriteriaService.GetAll(sort: "Name").Where(x => x.FactorId == factorId), "Id", "Name"), JsonRequestBehavior.AllowGet);
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing)

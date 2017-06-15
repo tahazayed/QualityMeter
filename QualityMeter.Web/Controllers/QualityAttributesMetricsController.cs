@@ -1,25 +1,28 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
+﻿using QualityMeter.Core.Models;
+using QualityMeter.Core.Services;
+using QualityMeter.Infrastructure.Common.Services;
+using QualityMeter.Infrastructure.Data;
+using System;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using QualityMeter.Core.Models;
-using QualityMeter.Infrastructure.Data;
 
 namespace QualityMeter.Web.Controllers
 {
     public class QualityAttributesMetricsController : Controller
     {
-        private EfQualityMeterBaseDb db = new EfQualityMeterBaseDb();
+        private readonly CriteriaService _oCriteriaService = new CriteriaService(new CriteriasRepository(), new DebugLogger());
+        private readonly FactorService _oFactorService = new FactorService(new FactorsRepository(), new DebugLogger());
+        private readonly SubjectService _oSubjectService = new SubjectService(new SubjectsRepository(), new DebugLogger());
+        private readonly QualityAttributesMetricService _oQualityAttributesMetricService = new QualityAttributesMetricService(new QualityAttributesMetricsRepository(), new DebugLogger());
+
+
 
         // GET: QualityAttributesMetrics
-        public ActionResult Index()
+        public ActionResult Index(string sort = "name"
+            , int page = 1, int pageSize = 10)
         {
-            var qualityAttributesMetrics = db.QualityAttributesMetrics.Include(q => q.Aganist).Include(q => q.Criteria).Include(q => q.RelatedTo);
-            return View(qualityAttributesMetrics.ToList());
+            return View(_oQualityAttributesMetricService.GetAll(sort, page, pageSize).ToList());
         }
 
         // GET: QualityAttributesMetrics/Details/5
@@ -29,7 +32,7 @@ namespace QualityMeter.Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            QualityAttributesMetric qualityAttributesMetric = db.QualityAttributesMetrics.Find(id);
+            QualityAttributesMetric qualityAttributesMetric = _oQualityAttributesMetricService.GetById(id.Value);
             if (qualityAttributesMetric == null)
             {
                 return HttpNotFound();
@@ -40,10 +43,14 @@ namespace QualityMeter.Web.Controllers
         // GET: QualityAttributesMetrics/Create
         public ActionResult Create()
         {
-            ViewBag.AganistId = new SelectList(db.QualityAttributesMetrics, "Id", "Name");
-            ViewBag.CriteriaId = new SelectList(db.Criterias, "Id", "Name");
-            ViewBag.RelatedToId = new SelectList(db.QualityAttributesMetrics, "Id", "Name");
-            return View();
+            QualityAttributesMetric qualityAttributesMetric = new QualityAttributesMetric();
+            ViewBag.SubjectId = new SelectList(_oSubjectService.GetAll(sort: "Name"), "Id", "Name");
+            ViewBag.FactorId = new SelectList(_oFactorService.GetAll(sort: "Name"), "Id", "Name");
+            ViewBag.CriteriaId = new SelectList(_oCriteriaService.GetAll(sort: "Name"), "Id", "Name");
+            ViewBag.AganistId = new SelectList(_oQualityAttributesMetricService.GetAll(sort: "Name"), "Id", "Name");
+
+            ViewBag.RelatedToId = new SelectList(_oQualityAttributesMetricService.GetAll(sort: "Name"), "Id", "Name");
+            return View(qualityAttributesMetric);
         }
 
         // POST: QualityAttributesMetrics/Create
@@ -56,14 +63,17 @@ namespace QualityMeter.Web.Controllers
             if (ModelState.IsValid)
             {
                 qualityAttributesMetric.Id = Guid.NewGuid();
-                db.QualityAttributesMetrics.Add(qualityAttributesMetric);
-                db.SaveChanges();
+                _oQualityAttributesMetricService.Add(qualityAttributesMetric);
                 return RedirectToAction("Index");
             }
 
-            ViewBag.AganistId = new SelectList(db.QualityAttributesMetrics, "Id", "Name", qualityAttributesMetric.AganistId);
-            ViewBag.CriteriaId = new SelectList(db.Criterias, "Id", "Name", qualityAttributesMetric.CriteriaId);
-            ViewBag.RelatedToId = new SelectList(db.QualityAttributesMetrics, "Id", "Name", qualityAttributesMetric.RelatedToId);
+            ViewBag.SubjectId = new SelectList(_oSubjectService.GetAll(sort: "Name"), "Id", "Name");
+            ViewBag.FactorId = new SelectList(_oFactorService.GetAll(sort: "Name"), "Id", "Name");
+            ViewBag.CriteriaId = new SelectList(_oCriteriaService.GetAll(sort: "Name"), "Id", "Name");
+            ViewBag.AganistId = new SelectList(_oQualityAttributesMetricService.GetAll(sort: "Name"), "Id", "Name");
+
+            ViewBag.RelatedToId = new SelectList(_oQualityAttributesMetricService.GetAll(sort: "Name"), "Id", "Name");
+
             return View(qualityAttributesMetric);
         }
 
@@ -74,14 +84,17 @@ namespace QualityMeter.Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            QualityAttributesMetric qualityAttributesMetric = db.QualityAttributesMetrics.Find(id);
+            QualityAttributesMetric qualityAttributesMetric = _oQualityAttributesMetricService.GetById(id.Value);
             if (qualityAttributesMetric == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.AganistId = new SelectList(db.QualityAttributesMetrics, "Id", "Name", qualityAttributesMetric.AganistId);
-            ViewBag.CriteriaId = new SelectList(db.Criterias, "Id", "Name", qualityAttributesMetric.CriteriaId);
-            ViewBag.RelatedToId = new SelectList(db.QualityAttributesMetrics, "Id", "Name", qualityAttributesMetric.RelatedToId);
+            ViewBag.SubjectId = new SelectList(_oSubjectService.GetAll(sort: "Name"), "Id", "Name");
+            ViewBag.FactorId = new SelectList(_oFactorService.GetAll(sort: "Name"), "Id", "Name");
+            ViewBag.CriteriaId = new SelectList(_oCriteriaService.GetAll(sort: "Name"), "Id", "Name");
+            ViewBag.AganistId = new SelectList(_oQualityAttributesMetricService.GetAll(sort: "Name").Where(x => x.Id != id.Value), "Id", "Name", qualityAttributesMetric.AganistId);
+
+            ViewBag.RelatedToId = new SelectList(_oQualityAttributesMetricService.GetAll(sort: "Name").Where(x => x.Id != id.Value), "Id", "Name", qualityAttributesMetric.RelatedToId);
             return View(qualityAttributesMetric);
         }
 
@@ -94,13 +107,17 @@ namespace QualityMeter.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(qualityAttributesMetric).State = EntityState.Modified;
-                db.SaveChanges();
+                qualityAttributesMetric.LastUpdated = DateTime.Now;
+                _oQualityAttributesMetricService.Update(qualityAttributesMetric);
                 return RedirectToAction("Index");
             }
-            ViewBag.AganistId = new SelectList(db.QualityAttributesMetrics, "Id", "Name", qualityAttributesMetric.AganistId);
-            ViewBag.CriteriaId = new SelectList(db.Criterias, "Id", "Name", qualityAttributesMetric.CriteriaId);
-            ViewBag.RelatedToId = new SelectList(db.QualityAttributesMetrics, "Id", "Name", qualityAttributesMetric.RelatedToId);
+            ViewBag.SubjectId = new SelectList(_oSubjectService.GetAll(sort: "Name"), "Id", "Name");
+            ViewBag.FactorId = new SelectList(_oFactorService.GetAll(sort: "Name"), "Id", "Name");
+            ViewBag.CriteriaId = new SelectList(_oCriteriaService.GetAll(sort: "Name"), "Id", "Name");
+            ViewBag.AganistId = new SelectList(_oQualityAttributesMetricService.GetAll(sort: "Name").Where(x => x.Id != qualityAttributesMetric.Id), "Id", "Name", qualityAttributesMetric.AganistId);
+
+            ViewBag.RelatedToId = new SelectList(_oQualityAttributesMetricService.GetAll(sort: "Name").Where(x => x.Id != qualityAttributesMetric.Id), "Id", "Name", qualityAttributesMetric.RelatedToId);
+
             return View(qualityAttributesMetric);
         }
 
@@ -111,7 +128,7 @@ namespace QualityMeter.Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            QualityAttributesMetric qualityAttributesMetric = db.QualityAttributesMetrics.Find(id);
+            QualityAttributesMetric qualityAttributesMetric = _oQualityAttributesMetricService.GetById(id.Value);
             if (qualityAttributesMetric == null)
             {
                 return HttpNotFound();
@@ -124,9 +141,7 @@ namespace QualityMeter.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(Guid id)
         {
-            QualityAttributesMetric qualityAttributesMetric = db.QualityAttributesMetrics.Find(id);
-            db.QualityAttributesMetrics.Remove(qualityAttributesMetric);
-            db.SaveChanges();
+            _oQualityAttributesMetricService.Delete(id);
             return RedirectToAction("Index");
         }
 
@@ -134,7 +149,7 @@ namespace QualityMeter.Web.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                //db.Dispose();
             }
             base.Dispose(disposing);
         }
