@@ -27,8 +27,7 @@ namespace QualityMeter.Core.Models
         public TypeOfMetric TypeOfMetric { get; set; }
 
         [Required]
-        [StringLength(1)]
-        public string Quantification { get; set; }
+        public Quantification Quantification { get; set; }
 
         [Required]
         public float StandardValue { get; set; }
