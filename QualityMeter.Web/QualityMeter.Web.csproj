@@ -208,6 +208,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\js\datepicker\daterangepicker.js" />
+    <Content Include="Content\js\dllCascade.js" />
     <Content Include="Content\js\moment\moment.min.js" />
     <Content Include="Content\maps\jquery-jvectormap-2.0.3.css" />
     <Content Include="Content\vendors\animate.css\animate.css" />

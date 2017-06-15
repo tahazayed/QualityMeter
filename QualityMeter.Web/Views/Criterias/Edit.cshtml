@@ -35,13 +35,18 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.FactorId, "FactorId", htmlAttributes: new { @class = "control-label col-md-2" })
+            <label class="control-label col-md-2" for="SubjectId">Subject</label>
+            <div class="col-md-10">
+                @Html.DropDownList("SubjectId", null, htmlAttributes: new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.FactorId, "Factor", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("FactorId", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.FactorId, "", new { @class = "text-danger" })
             </div>
         </div>
-
 
         @Html.HiddenFor(model => model.CreationDate, new { htmlAttributes = new { @class = "form-control" } })
 
@@ -68,4 +73,5 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Content/js/dllCascade.js" type="text/javascript"></script>
 }

@@ -121,6 +121,12 @@ namespace QualityMeter.Web.Controllers
             return RedirectToAction("Index");
         }
 
+        [HttpPost]
+        public ActionResult GetFactors(Guid subjectId)
+        {
+
+            return Json(new SelectList(_oFactorService.GetAll(sort: "Name").Where(x => x.SubjectId == subjectId), "Id", "Name"), JsonRequestBehavior.AllowGet);
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing)
