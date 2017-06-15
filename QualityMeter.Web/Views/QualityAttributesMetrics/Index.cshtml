@@ -1,0 +1,106 @@
+﻿@model IEnumerable<QualityMeter.Core.Models.QualityAttributesMetric>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Quality Attributes Metric-Listing</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Aganist.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Criteria.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RelatedTo.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TypeOfMetric)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Quantification)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StandardValue)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EvaluationValue)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RuteBased)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreationDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LastUpdated)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RowVersion)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Aganist.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Criteria.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RelatedTo.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TypeOfMetric)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Quantification)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StandardValue)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EvaluationValue)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RuteBased)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CreationDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LastUpdated)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RowVersion)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,129 @@
+﻿@model QualityMeter.Core.Models.QualityAttributesMetric
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Quality Attributes Metric</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Aganist.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Aganist.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Criteria.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Criteria.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RelatedTo.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RelatedTo.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TypeOfMetric)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TypeOfMetric)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Quantification)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Quantification)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.StandardValue)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StandardValue)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EvaluationValue)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EvaluationValue)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RuteBased)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RuteBased)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreationDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreationDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LastUpdated)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LastUpdated)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RowVersion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RowVersion)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>
