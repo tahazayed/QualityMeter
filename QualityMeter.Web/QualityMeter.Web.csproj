@@ -188,6 +188,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ApplicationEvaluationsController.cs" />
     <Compile Include="Controllers\ApplicationsController.cs" />
     <Compile Include="Controllers\CriteriasController.cs" />
     <Compile Include="Controllers\FactorsController.cs" />
@@ -4467,6 +4468,11 @@
     <Content Include="Views\Applications\Details.cshtml" />
     <Content Include="Views\Applications\Edit.cshtml" />
     <Content Include="Views\Applications\Index.cshtml" />
+    <Content Include="Views\ApplicationEvaluations\Create.cshtml" />
+    <Content Include="Views\ApplicationEvaluations\Delete.cshtml" />
+    <Content Include="Views\ApplicationEvaluations\Details.cshtml" />
+    <Content Include="Views\ApplicationEvaluations\Edit.cshtml" />
+    <Content Include="Views\ApplicationEvaluations\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

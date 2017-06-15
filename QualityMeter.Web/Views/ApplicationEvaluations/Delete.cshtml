@@ -1,0 +1,81 @@
+﻿@model QualityMeter.Core.Models.ApplicationEvaluation
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>ApplicationEvaluation</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Application.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Application.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.QualityAttributesMetric.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.QualityAttributesMetric.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.QualityValue)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.QualityValue)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UserValue)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserValue)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreationDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreationDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LastUpdated)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LastUpdated)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RowVersion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RowVersion)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>
