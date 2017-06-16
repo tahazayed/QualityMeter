@@ -10,6 +10,7 @@ using System.Web.Mvc;
 
 namespace QualityMeter.Web.Controllers
 {
+    [Authorize]
     public class ApplicationsController : Controller
     {
         private readonly ApplicationService _oApplicationService = new ApplicationService(new ApplicationsRepository(), new DebugLogger());

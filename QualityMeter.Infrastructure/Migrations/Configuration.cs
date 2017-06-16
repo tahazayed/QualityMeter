@@ -1,3 +1,6 @@
+using QualityMeter.Core.Models;
+using System.Linq;
+
 namespace QualityMeter.Infrastructure.Migrations
 {
     using System.Data.Entity.Migrations;
@@ -11,18 +14,61 @@ namespace QualityMeter.Infrastructure.Migrations
 
         protected override void Seed(QualityMeter.Infrastructure.Data.EfQualityMeterBaseDb context)
         {
-            //  This method will be called after migrating to the latest version.
+            //create roles
+            context.Roles.AddOrUpdate(u => u.Roles,
+                new Role
+                {
+                    Roles = "Admin",
+                    IsSystem = true
+                },
+                new Role
+                {
+                    Roles = "Auditor",
+                    IsSystem = true
+                }
+            );
+            //create admin user
+            context.Users.AddOrUpdate(u => u.UserName, new User
+            {
+                Active = true,
+                Password = "RG9uJ3RMb2dpbg==-bzwUvvK6shM=", //Don'tLogin
+                UserName = "Admin",
+                IsSystem = true
+            },
+             new User
+             {
+                 Active = true,
+                 Password = "RG9uJ3RMb2dpbg==-bzwUvvK6shM=", //Don'tLogin
+                 UserName = "Auditor",
+                 IsSystem = true
+             });
 
-            //  You can use the DbSet<T>.AddOrUpdate() helper extension method
-            //  to avoid creating duplicate seed data. E.g.
-            //
-            //    context.People.AddOrUpdate(
-            //      p => p.FullName,
-            //      new Person { FullName = "Andrew Peters" },
-            //      new Person { FullName = "Brice Lambson" },
-            //      new Person { FullName = "Rowan Miller" }
-            //    );
-            //
+            context.SaveChanges();
+
+            var adminRole = (from r in context.Roles
+                             where r.Roles == "Admin"
+                             select r).SingleOrDefault();
+            var auditorRole = (from r in context.Roles
+                               where r.Roles == "Auditor"
+                               select r).SingleOrDefault();
+
+            var adminUser = (from r in context.Users
+                             where r.UserName == "Admin"
+                             select r).SingleOrDefault();
+            var auditorUser = (from r in context.Users
+                               where r.UserName == "Auditor"
+                               select r).SingleOrDefault();
+            context.UserRoles.AddOrUpdate(r => new { r.RoleId, r.UserId }, new UserRole
+            {
+                RoleId = adminRole.Id,
+                UserId = adminUser.Id
+            }
+            , new UserRole
+            {
+                RoleId = auditorRole.Id,
+                UserId = auditorUser.Id
+            });
+            context.SaveChanges();
         }
     }
 }

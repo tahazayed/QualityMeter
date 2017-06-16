@@ -164,6 +164,7 @@ namespace MadintyFacebook.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
             if (!string.IsNullOrWhiteSpace(returnUrl))
@@ -174,6 +175,7 @@ namespace MadintyFacebook.Controllers
         }
 
         [HttpPost]
+        [AllowAnonymous]
         public ActionResult Login(User user, string returnUrl)
         {
 

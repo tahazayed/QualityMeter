@@ -11,6 +11,7 @@ using System.Web.Mvc;
 
 namespace QualityMeter.Web.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class QualityAttributesMetricsController : Controller
     {
         private readonly CriteriaService _oCriteriaService = new CriteriaService(new CriteriasRepository(), new DebugLogger());

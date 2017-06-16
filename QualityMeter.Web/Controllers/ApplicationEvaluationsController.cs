@@ -10,6 +10,7 @@ using System.Web.Mvc;
 
 namespace QualityMeter.Web.Controllers
 {
+    [Authorize]
     public class ApplicationEvaluationsController : Controller
     {
 
@@ -51,7 +52,7 @@ namespace QualityMeter.Web.Controllers
             if (ModelState.IsValid)
             {
                 var lstExistingApplicationEvaluations = _oApplicationEvaluationService.GetAll()
-                       .Where(x =>x.ApplicationId == applicationEvaluation.ApplicationId &&
+                       .Where(x => x.ApplicationId == applicationEvaluation.ApplicationId &&
                         x.QualityAttributesMetricId == applicationEvaluation.QualityAttributesMetricId);
                 foreach (var existingApplicationEvaluation in lstExistingApplicationEvaluations)
                 {

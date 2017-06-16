@@ -22,13 +22,40 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Subjects", "Index", "Subjects")</li>
-                    <li>@Html.ActionLink("Factors", "Index", "Factors")</li>
-                    <li>@Html.ActionLink("Criterias", "Index", "Criterias")</li>
-                    <li>@Html.ActionLink("Quality Attributes Metrics", "Index", "QualityAttributesMetrics")</li>
-                    <li>@Html.ActionLink("Applications", "Index", "Applications")</li>
+                    @if (Request.IsAuthenticated)
+                    {
+                        if (Roles.IsUserInRole("Admin"))
+                        {
+                            <li>@Html.ActionLink("Subjects", "Index", "Subjects")</li>
+                            <li>@Html.ActionLink("Factors", "Index", "Factors")</li>
+                            <li>@Html.ActionLink("Criterias", "Index", "Criterias")</li>
+                            <li>@Html.ActionLink("Quality Attributes Metrics", "Index", "QualityAttributesMetrics")</li>
+                            <li class="dropdown">
+                                <a href="#" data-toggle="dropdown" class="dropdown-toggle">Manage Users<b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    <li>@Html.ActionLink("Manage Users", "Index", "Users")</li>
+                                    <li>@Html.ActionLink("Manage Roles", "Index", "Roles")</li>
+                                    <li>@Html.ActionLink("Manage Users Roles", "Index", "User_Roles")</li>
+                                </ul>
+                            </li>
+                        }
+                        <li>@Html.ActionLink("Applications", "Index", "Applications")</li>
+                    }
                 </ul>
-                @Html.Partial("_LoginPartial")
+                <ul class="nav navbar-nav" style="float: right;">
+                    <li>
+                        @if (Request.IsAuthenticated)
+                        {
+                            <strong style="display: inline-block; color: white;">@Html.Encode(User.Identity.Name)</strong>
+                            @Html.ActionLink("Sign Out", "Logout", "Users", null, new { style = "display:inline-block;" })
+                        }
+                        else
+                        {
+                            @Html.ActionLink("Sign In", "Login", "Users")
+                        }
+                    </li>
+
+                </ul>
             </div>
         </div>
     </div>

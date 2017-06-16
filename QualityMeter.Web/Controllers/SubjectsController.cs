@@ -9,6 +9,7 @@ using System.Web.Mvc;
 
 namespace QualityMeter.Web.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class SubjectsController : Controller
     {
         private readonly SubjectService _oSubjectService = new SubjectService(new SubjectsRepository(), new DebugLogger());

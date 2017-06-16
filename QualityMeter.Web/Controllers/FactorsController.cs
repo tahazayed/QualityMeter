@@ -10,6 +10,7 @@ using System.Web.Mvc;
 
 namespace QualityMeter.Web.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class FactorsController : Controller
     {
         private readonly FactorService _oFactorService = new FactorService(new FactorsRepository(), new DebugLogger());
