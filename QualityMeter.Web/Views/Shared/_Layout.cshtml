@@ -30,6 +30,10 @@
                             <li>@Html.ActionLink("Factors", "Index", "Factors")</li>
                             <li>@Html.ActionLink("Criterias", "Index", "Criterias")</li>
                             <li>@Html.ActionLink("Quality Attributes Metrics", "Index", "QualityAttributesMetrics")</li>
+                        }
+                        <li>@Html.ActionLink("Applications", "Index", "Applications")</li>
+                        if (Roles.IsUserInRole("Admin"))
+                        {
                             <li class="dropdown">
                                 <a href="#" data-toggle="dropdown" class="dropdown-toggle">Manage Users<b class="caret"></b></a>
                                 <ul class="dropdown-menu">
@@ -39,7 +43,6 @@
                                 </ul>
                             </li>
                         }
-                        <li>@Html.ActionLink("Applications", "Index", "Applications")</li>
                     }
                 </ul>
                 <ul class="nav navbar-nav" style="float: right;">
