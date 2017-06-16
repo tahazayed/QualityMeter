@@ -12,6 +12,8 @@ namespace QualityMeter.Web.Controllers
     public class ApplicationsController : Controller
     {
         private readonly ApplicationService _oApplicationService = new ApplicationService(new ApplicationsRepository(), new DebugLogger());
+        private readonly QualityAttributesMetricService _oQualityAttributesMetricService = new QualityAttributesMetricService(new QualityAttributesMetricsRepository(), new DebugLogger());
+        private readonly ApplicationEvaluationService _oApplicationEvaluationService = new ApplicationEvaluationService(new ApplicationEvaluationsRepository(), new DebugLogger());
 
         // GET: Applications
         public ActionResult Index(int page = 1)
@@ -52,8 +54,22 @@ namespace QualityMeter.Web.Controllers
             {
                 application.Id = Guid.NewGuid();
                 _oApplicationService.Add(application);
+                foreach (var qualityAttributesMetric in _oQualityAttributesMetricService.GetAll())
+                {
+                    var applicationEvaluation = new ApplicationEvaluation
+                    {
+                        Id = Guid.NewGuid(),
+                        QualityAttributesMetricId = qualityAttributesMetric.Id,
+                        ApplicationId = application.Id,
+                        UserValue = qualityAttributesMetric.EvaluationValue
 
-                return RedirectToAction("Index");
+                    };
+
+                    _oApplicationEvaluationService.Add(applicationEvaluation);
+
+                }
+
+                return RedirectToAction("Edit",new {Id= application.Id });
             }
 
             return View(application);
