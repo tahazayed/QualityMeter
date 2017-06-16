@@ -1,4 +1,5 @@
-﻿using QualityMeter.Core.Models;
+﻿using PagedList;
+using QualityMeter.Core.Models;
 using QualityMeter.Core.Services;
 using QualityMeter.Infrastructure.Common.Services;
 using QualityMeter.Infrastructure.Data;
@@ -17,10 +18,10 @@ namespace QualityMeter.Web.Controllers
 
 
         // GET: ApplicationEvaluations
-        public ActionResult Index(Guid applicationId)
+        public ActionResult Index(Guid applicationId, int page = 1)
         {
             ViewBag.applicationId = applicationId;
-            return PartialView(_oApplicationEvaluationService.GetAll(sort: "Id").Where(x => x.ApplicationId == applicationId).ToList());
+            return PartialView(_oApplicationEvaluationService.GetAll(sort: "Id").Where(x => x.ApplicationId == applicationId).ToPagedList(page, 50));
         }
 
 

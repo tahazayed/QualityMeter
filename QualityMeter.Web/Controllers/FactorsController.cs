@@ -1,4 +1,5 @@
-﻿using QualityMeter.Core.Models;
+﻿using PagedList;
+using QualityMeter.Core.Models;
 using QualityMeter.Core.Services;
 using QualityMeter.Infrastructure.Common.Services;
 using QualityMeter.Infrastructure.Data;
@@ -15,9 +16,9 @@ namespace QualityMeter.Web.Controllers
         private readonly SubjectService _oSubjectService = new SubjectService(new SubjectsRepository(), new DebugLogger());
 
         // GET: Factors
-        public ActionResult Index()
+        public ActionResult Index(int page = 1)
         {
-            return View(_oFactorService.GetAll(sort: "Name").ToList());
+            return View(_oFactorService.GetAll(sort: "Name").ToPagedList(page, 10));
         }
 
         // GET: Factors/Details/5

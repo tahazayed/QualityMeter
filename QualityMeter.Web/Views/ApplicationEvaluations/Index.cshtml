@@ -1,12 +1,16 @@
-﻿@model IEnumerable<QualityMeter.Core.Models.ApplicationEvaluation>
+﻿
+@model PagedList.IPagedList<QualityMeter.Core.Models.ApplicationEvaluation>
+@using PagedList.Mvc;
 
-}
+
 @Styles.Render("~/Content/css")
 @Scripts.Render("~/bundles/modernizr")
 @Scripts.Render("~/bundles/jquery")
 @Scripts.Render("~/bundles/jqueryval")
 @Scripts.Render("~/bundles/bootstrap")
 @Scripts.Render("~/Content/js/ModalDialog.js")
+
+@Styles.Render("~/Content/PagedList.css")
 <p>
     @Html.ActionLink("Add Application Evaluation", "Create", new { applicationId = ViewBag.applicationId }, new { btnName = "btnCreateItem", @class = "btn btn-default btn-xs" })
 </p>
@@ -46,6 +50,9 @@
     }
 
 </table>
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Edit", "Applications", new { page, applicationId = ViewBag.applicationId, Id= ViewBag.applicationId }))
 <script type="text/javascript">
     $(document)
         .ready(function () {

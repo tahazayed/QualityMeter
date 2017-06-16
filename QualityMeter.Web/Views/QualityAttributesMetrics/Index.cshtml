@@ -1,4 +1,8 @@
-﻿@model IEnumerable<QualityMeter.Core.Models.QualityAttributesMetric>
+﻿
+@model PagedList.IPagedList<QualityMeter.Core.Models.QualityAttributesMetric>
+@using PagedList.Mvc;
+
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 
 @{
     ViewBag.Title = "Index";
@@ -21,13 +25,13 @@
         </th>
 
         <th>
-            @Html.DisplayNameFor(model => model.Description)
+            Description
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.TypeOfMetric)
+            Type Of Metric
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Quantification)
+            Quantification
         </th>
         <th>
             Standard Value
@@ -39,10 +43,10 @@
             Route Based
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.CreationDate)
+            Creation Date
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.LastUpdated)
+            LastUpdated
         </th>
 
         <th></th>
@@ -92,3 +96,6 @@
     }
 
 </table>
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page }))

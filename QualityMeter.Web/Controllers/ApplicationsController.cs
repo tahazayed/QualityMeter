@@ -1,9 +1,9 @@
-﻿using QualityMeter.Core.Models;
+﻿using PagedList;
+using QualityMeter.Core.Models;
 using QualityMeter.Core.Services;
 using QualityMeter.Infrastructure.Common.Services;
 using QualityMeter.Infrastructure.Data;
 using System;
-using System.Linq;
 using System.Net;
 using System.Web.Mvc;
 
@@ -14,9 +14,9 @@ namespace QualityMeter.Web.Controllers
         private readonly ApplicationService _oApplicationService = new ApplicationService(new ApplicationsRepository(), new DebugLogger());
 
         // GET: Applications
-        public ActionResult Index()
+        public ActionResult Index(int page = 1)
         {
-            return View(_oApplicationService.GetAll(sort: "Name").ToList());
+            return View(_oApplicationService.GetAll(sort: "Name").ToPagedList(page, 10));
         }
 
         // GET: Applications/Details/5

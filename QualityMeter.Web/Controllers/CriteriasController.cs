@@ -1,4 +1,5 @@
-﻿using QualityMeter.Core.Models;
+﻿using PagedList;
+using QualityMeter.Core.Models;
 using QualityMeter.Core.Services;
 using QualityMeter.Infrastructure.Common.Services;
 using QualityMeter.Infrastructure.Data;
@@ -17,9 +18,9 @@ namespace QualityMeter.Web.Controllers
 
 
         // GET: Criteria
-        public ActionResult Index()
+        public ActionResult Index(int page = 1)
         {
-            return View(_oCriteriaService.GetAll(sort: "Name").ToList());
+            return View(_oCriteriaService.GetAll(sort: "Name").ToPagedList(page, 10));
         }
 
         // GET: Criteria/Details/5
