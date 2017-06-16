@@ -24,7 +24,7 @@ namespace QualityMeter.Web.Controllers
         public ActionResult Index(Guid applicationId, int page = 1)
         {
             ViewBag.applicationId = applicationId;
-            return PartialView(_oApplicationEvaluationService.GetAll(sort: "Id").Where(x => x.ApplicationId == applicationId).ToPagedList(page, 5));
+            return PartialView(_oApplicationEvaluationService.GetAll(sort: "Id").Where(x => x.ApplicationId == applicationId).ToPagedList(page, 10));
         }
 
 
