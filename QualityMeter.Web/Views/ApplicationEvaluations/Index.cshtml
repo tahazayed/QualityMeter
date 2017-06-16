@@ -52,7 +52,7 @@
 </table>
 Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
 
-@Html.PagedListPager(Model, page => Url.Action("Edit", "Applications", new { page, applicationId = ViewBag.applicationId, Id= ViewBag.applicationId }))
+@Html.PagedListPager(Model, page => Url.Action("Edit", "Applications", new { page = page, applicationId = ViewBag.applicationId, Id= ViewBag.applicationId }))
 <script type="text/javascript">
     $(document)
         .ready(function () {

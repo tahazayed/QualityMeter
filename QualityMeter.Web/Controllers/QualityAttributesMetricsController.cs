@@ -192,7 +192,12 @@ namespace QualityMeter.Web.Controllers
             _oQualityAttributesMetricService.Delete(id);
             return RedirectToAction("Index");
         }
+        [HttpPost]
+        public ActionResult GetQualityAttributesMetrics(Guid criteriaId)
+        {
 
+            return Json(new SelectList(_oQualityAttributesMetricService.GetAll(sort: "Name").Where(x => x.CriteriaId == criteriaId), "Id", "Name"), JsonRequestBehavior.AllowGet);
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing)

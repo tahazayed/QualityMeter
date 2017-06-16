@@ -18,7 +18,7 @@ namespace QualityMeter.Core.Services
 {
     public class GenericService<T> : IGenericService<T> where T : CommonBaseBusinessEntity
     {
-        const int MaxPageSize = 10;
+        const int MaxPageSize = Int32.MaxValue;
         protected readonly IGenericRepository<T> _oRepository;
         protected readonly ILog _oLogging;
 

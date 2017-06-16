@@ -14,6 +14,9 @@ namespace QualityMeter.Web.Controllers
     {
 
         private readonly ApplicationEvaluationService _oApplicationEvaluationService = new ApplicationEvaluationService(new ApplicationEvaluationsRepository(), new DebugLogger());
+        private readonly CriteriaService _oCriteriaService = new CriteriaService(new CriteriasRepository(), new DebugLogger());
+        private readonly FactorService _oFactorService = new FactorService(new FactorsRepository(), new DebugLogger());
+        private readonly SubjectService _oSubjectService = new SubjectService(new SubjectsRepository(), new DebugLogger());
         private readonly QualityAttributesMetricService _oQualityAttributesMetricService = new QualityAttributesMetricService(new QualityAttributesMetricsRepository(), new DebugLogger());
 
 
@@ -21,7 +24,7 @@ namespace QualityMeter.Web.Controllers
         public ActionResult Index(Guid applicationId, int page = 1)
         {
             ViewBag.applicationId = applicationId;
-            return PartialView(_oApplicationEvaluationService.GetAll(sort: "Id").Where(x => x.ApplicationId == applicationId).ToPagedList(page, 50));
+            return PartialView(_oApplicationEvaluationService.GetAll(sort: "Id").Where(x => x.ApplicationId == applicationId).ToPagedList(page, 5));
         }
 
 
@@ -30,7 +33,9 @@ namespace QualityMeter.Web.Controllers
         public ActionResult Create(Guid applicationId)
         {
             ApplicationEvaluation applicationEvaluation = new ApplicationEvaluation { ApplicationId = applicationId };
-
+            ViewBag.SubjectId = new SelectList(_oSubjectService.GetAll(sort: "Name"), "Id", "Name");
+            ViewBag.FactorId = new SelectList(_oFactorService.GetAll(sort: "Name"), "Id", "Name");
+            ViewBag.CriteriaId = new SelectList(_oCriteriaService.GetAll(sort: "Name"), "Id", "Name");
 
             ViewBag.QualityAttributesMetricId = new SelectList(_oQualityAttributesMetricService.GetAll(sort: "Name").ToList(), "Id", "Name");
             return PartialView(applicationEvaluation);
@@ -50,8 +55,12 @@ namespace QualityMeter.Web.Controllers
 
                 return Json(new { success = true });
             }
+            ViewBag.SubjectId = new SelectList(_oSubjectService.GetAll(sort: "Name"), "Id", "Name");
+            ViewBag.FactorId = new SelectList(_oFactorService.GetAll(sort: "Name"), "Id", "Name");
+            ViewBag.CriteriaId = new SelectList(_oCriteriaService.GetAll(sort: "Name"), "Id", "Name");
 
             ViewBag.QualityAttributesMetricId = new SelectList(_oQualityAttributesMetricService.GetAll(sort: "Name"), "Id", "Name", applicationEvaluation.QualityAttributesMetricId);
+
             return PartialView(applicationEvaluation);
         }
 
@@ -67,6 +76,9 @@ namespace QualityMeter.Web.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.SubjectId = new SelectList(_oSubjectService.GetAll(sort: "Name"), "Id", "Name");
+            ViewBag.FactorId = new SelectList(_oFactorService.GetAll(sort: "Name"), "Id", "Name");
+            ViewBag.CriteriaId = new SelectList(_oCriteriaService.GetAll(sort: "Name"), "Id", "Name");
 
             ViewBag.QualityAttributesMetricId = new SelectList(_oQualityAttributesMetricService.GetAll(sort: "Name"), "Id", "Name", applicationEvaluation.QualityAttributesMetricId);
             return PartialView(applicationEvaluation);
@@ -85,7 +97,9 @@ namespace QualityMeter.Web.Controllers
                 _oApplicationEvaluationService.Update(applicationEvaluation);
                 return Json(new { success = true });
             }
-
+            ViewBag.SubjectId = new SelectList(_oSubjectService.GetAll(sort: "Name"), "Id", "Name");
+            ViewBag.FactorId = new SelectList(_oFactorService.GetAll(sort: "Name"), "Id", "Name");
+            ViewBag.CriteriaId = new SelectList(_oCriteriaService.GetAll(sort: "Name"), "Id", "Name");
             ViewBag.QualityAttributesMetricId = new SelectList(_oQualityAttributesMetricService.GetAll(sort: "Name"), "Id", "Name", applicationEvaluation.QualityAttributesMetricId);
             return PartialView(applicationEvaluation);
         }
