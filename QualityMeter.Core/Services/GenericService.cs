@@ -154,7 +154,7 @@ namespace QualityMeter.Core.Services
                 {
                     _oLogging.Error(typeof(T) + ".Delete", ex.InnerException ?? ex);
                 }
-                throw ex.InnerException ?? ex;
+                //throw ex.InnerException ?? ex;
             }
         }
 

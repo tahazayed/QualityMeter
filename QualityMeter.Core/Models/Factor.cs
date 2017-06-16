@@ -10,13 +10,14 @@ namespace QualityMeter.Core.Models
     {
         [Required]
         [StringLength(500, MinimumLength = 2)]
-        [Index(IsUnique = true)]
+        [Index("IX_Name_SubjectId", IsUnique = true, Order = 1)]
 
         public string Name { get; set; }
 
         public string Description { get; set; }
 
         [Required]
+        [Index("IX_Name_SubjectId", IsUnique = true, Order = 2)]
         public Guid SubjectId { get; set; }
 
 
