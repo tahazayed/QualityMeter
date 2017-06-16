@@ -19,6 +19,11 @@ namespace QualityMeter.Infrastructure.Data
 
         public DbSet<Application> Applications { get; set; }
         public DbSet<ApplicationEvaluation> ApplicationEvaluations { get; set; }
+        public DbSet<User> Users { get; set; }
+
+        public DbSet<Role> Roles { get; set; }
+
+        public DbSet<UserRole> UserRoles { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
