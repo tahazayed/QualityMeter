@@ -1,0 +1,79 @@
+﻿@model IEnumerable<QualityMeter.Core.Models.ApplicationEvaluation>
+
+@{
+    ViewBag.Title = "Details Report";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/Content/print.css" rel="stylesheet" media="print" />
+
+<h2>Details Report</h2>
+<h4>
+    Application: @ViewBag.ApplicationName
+</h4>
+<h4>
+    Customer: @ViewBag.Customer
+</h4>
+<table class="table">
+    <tr>
+        <th>
+            Subject
+        </th>
+        <th>
+            Factor
+        </th>
+        <th>
+            Criteria
+        </th>
+        <th>
+            QualityAttributesMetric
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.QualityValue)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UserValue)
+        </th>
+        <th>
+            Percentage
+        </th>
+
+    </tr>
+
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.QualityAttributesMetric.Criteria.Factor.Subject.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.QualityAttributesMetric.Criteria.Factor.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.QualityAttributesMetric.Criteria.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.QualityAttributesMetric.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.QualityValue)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserValue)
+            </td>
+            <td>
+                % @(Math.Round(item.QualityValue/item.UserValue * 100,2))
+            </td>
+        </tr>
+    }
+
+</table>
+<br />
+<hr />
+<P align="right">
+    Quality Percentage:  % @ViewBag.QualityPercentage
+</P>
+<p>
+    <a href="javascript:window.print();" class="btn btn-default noprint">Print</a>
+</p>
+<div class="noprint">
+    @Html.ActionLink("Back to List", "Index")
+</div>

@@ -26,10 +26,7 @@
             Customer
         </th>
         <th>
-            Creation Date
-        </th>
-        <th>
-            LastUpdated
+            Reports
         </th>
         <th></th>
     </tr>
@@ -46,10 +43,7 @@
             @Html.DisplayFor(modelItem => item.Customer)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.CreationDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.LastUpdated)
+            @Html.ActionLink("Details Report", "DetailsReport", new { id = item.Id })
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |

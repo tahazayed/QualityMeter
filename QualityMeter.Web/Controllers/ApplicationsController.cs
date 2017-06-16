@@ -4,6 +4,7 @@ using QualityMeter.Core.Services;
 using QualityMeter.Infrastructure.Common.Services;
 using QualityMeter.Infrastructure.Data;
 using System;
+using System.Linq;
 using System.Net;
 using System.Web.Mvc;
 
@@ -69,7 +70,7 @@ namespace QualityMeter.Web.Controllers
 
                 }
 
-                return RedirectToAction("Edit",new {Id= application.Id });
+                return RedirectToAction("Edit", new { Id = application.Id });
             }
 
             return View(application);
@@ -119,6 +120,32 @@ namespace QualityMeter.Web.Controllers
                 return HttpNotFound();
             }
             return View(application);
+        }
+        // GET: Applications/Details/5
+        public ActionResult DetailsReport(Guid? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Application application = _oApplicationService.GetById(id.Value);
+            if (application == null)
+            {
+                return HttpNotFound();
+            }
+            var lstApplicationEvaluation =
+                _oApplicationEvaluationService.GetAll().Where(x => x.ApplicationId == id.Value);
+            float SumQualityValue = 0, SumUserValue = 0;
+            foreach (var applicationEvaluation in lstApplicationEvaluation)
+            {
+                SumQualityValue += applicationEvaluation.QualityValue;
+                SumUserValue += applicationEvaluation.UserValue;
+
+            }
+            ViewBag.ApplicationName = application.Name;
+            ViewBag.Customer = application.Customer;
+            ViewBag.QualityPercentage = Math.Round(SumQualityValue * 100 / SumUserValue, 2);
+            return View(lstApplicationEvaluation);
         }
 
         // POST: Applications/Delete/5

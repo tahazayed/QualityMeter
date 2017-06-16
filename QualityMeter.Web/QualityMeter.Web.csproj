@@ -225,6 +225,7 @@
     <Content Include="Content\js\moment\moment.min.js" />
     <Content Include="Content\maps\jquery-jvectormap-2.0.3.css" />
     <Content Include="Content\PagedList.css" />
+    <Content Include="Content\print.css" />
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />
     <Content Include="Content\themes\base\autocomplete.css" />
@@ -4528,6 +4529,7 @@
     <Content Include="Views\ApplicationEvaluations\Delete.cshtml" />
     <Content Include="Views\ApplicationEvaluations\Edit.cshtml" />
     <Content Include="Views\ApplicationEvaluations\Index.cshtml" />
+    <Content Include="Views\Applications\DetailsReport.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
