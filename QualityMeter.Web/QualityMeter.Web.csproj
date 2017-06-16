@@ -4518,7 +4518,6 @@
     <Content Include="Views\Applications\Index.cshtml" />
     <Content Include="Views\ApplicationEvaluations\Create.cshtml" />
     <Content Include="Views\ApplicationEvaluations\Delete.cshtml" />
-    <Content Include="Views\ApplicationEvaluations\Details.cshtml" />
     <Content Include="Views\ApplicationEvaluations\Edit.cshtml" />
     <Content Include="Views\ApplicationEvaluations\Index.cshtml" />
   </ItemGroup>

@@ -42,8 +42,7 @@
                     // remove the original form the page
                     $('#' + dialogId).remove();
                 }
-            }).next(".ui-widget-overlay")
-                .css("background", "#f00ba2");
+            });
 
             // Enable client side validation
             $.validator.unobtrusive.parse(this);

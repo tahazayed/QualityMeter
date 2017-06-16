@@ -12,26 +12,15 @@
 </p>
 <table class="table">
     <tr>
+
         <th>
-            @Html.DisplayNameFor(model => model.Application.Name)
+            QualityAttributesMetric
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.QualityAttributesMetric.Name)
+            Quality Value
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.QualityValue)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.UserValue)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CreationDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.LastUpdated)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.RowVersion)
+            User Value
         </th>
         <th></th>
     </tr>
@@ -39,9 +28,6 @@
     @foreach (var item in Model)
     {
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Application.Name)
-            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.QualityAttributesMetric.Name)
             </td>
@@ -51,15 +37,7 @@
             <td>
                 @Html.DisplayFor(modelItem => item.UserValue)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CreationDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LastUpdated)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.RowVersion)
-            </td>
+
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { btnName = "btnEditItem", @class = "btn btn-default btn-xs" })
                 @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { btnName = "btnDeleteItem", @class = "btn btn-default btn-xs" })
@@ -105,7 +83,7 @@
                                 success: function (data) {
                                     if (data.success) {
                                         $('#detailFrame')
-                                            .load("/ApplicationEvaluations/Index?OrderID=@ViewBag.OrderID");
+                                            .load("/ApplicationEvaluations/Index?applicationId=@ViewBag.applicationId");
                                     } else {
 
                                         alert(data.errormessage);
