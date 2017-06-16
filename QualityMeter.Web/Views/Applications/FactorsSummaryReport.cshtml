@@ -1,23 +1,23 @@
 ﻿@model IEnumerable<QualityMeter.Core.Models.ApplicationEvaluation>
 
 @{
-    ViewBag.Title = "Criteria Summary Report";
+    ViewBag.Title = "Factors Summary Report";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <link href="~/Content/print.css" rel="stylesheet" media="print" />
 
-<h2>Criteria Summary Report</h2>
+<h2>Factors Summary Report</h2>
 <h4>
     Application: @ViewBag.ApplicationName
 </h4>
 <h4>
-    Customer: @ViewBag.Customer
+    Factors: @ViewBag.Customer
 </h4>
 
 <h4>
-    Criteria:
+    Factors:
 </h4>
-@foreach (var group in Model.GroupBy(item => item.QualityAttributesMetric.Criteria.Name))
+@foreach (var group in Model.GroupBy(item => item.QualityAttributesMetric.Criteria.Factor.Name))
 {
     <li>
         @Html.Encode(group.Key)

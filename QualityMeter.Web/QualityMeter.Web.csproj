@@ -4531,6 +4531,7 @@
     <Content Include="Views\ApplicationEvaluations\Index.cshtml" />
     <Content Include="Views\Applications\DetailsReport.cshtml" />
     <Content Include="Views\Applications\CriteriaSummaryReport.cshtml" />
+    <Content Include="Views\Applications\FactorsSummaryReport.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
