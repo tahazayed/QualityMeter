@@ -50,6 +50,13 @@ namespace QualityMeter.Web.Controllers
         {
             if (ModelState.IsValid)
             {
+                var lstExistingApplicationEvaluations = _oApplicationEvaluationService.GetAll()
+                       .Where(x =>x.ApplicationId == applicationEvaluation.ApplicationId &&
+                        x.QualityAttributesMetricId == applicationEvaluation.QualityAttributesMetricId);
+                foreach (var existingApplicationEvaluation in lstExistingApplicationEvaluations)
+                {
+                    _oApplicationEvaluationService.Delete(existingApplicationEvaluation.Id);
+                }
                 applicationEvaluation.Id = Guid.NewGuid();
                 _oApplicationEvaluationService.Add(applicationEvaluation);
 
@@ -93,8 +100,19 @@ namespace QualityMeter.Web.Controllers
         {
             if (ModelState.IsValid)
             {
+                _oApplicationEvaluationService.Delete(applicationEvaluation.Id);
+                var lstExistingApplicationEvaluations = _oApplicationEvaluationService.GetAll()
+                     .Where(
+                         x =>
+                             x.ApplicationId == applicationEvaluation.ApplicationId &&
+                             x.QualityAttributesMetricId == applicationEvaluation.QualityAttributesMetricId);
+                foreach (var existingApplicationEvaluation in lstExistingApplicationEvaluations)
+                {
+                    _oApplicationEvaluationService.Delete(existingApplicationEvaluation.Id);
+                }
                 applicationEvaluation.LastUpdated = DateTime.Now;
-                _oApplicationEvaluationService.Update(applicationEvaluation);
+                applicationEvaluation.Id = Guid.NewGuid();
+                _oApplicationEvaluationService.Add(applicationEvaluation);
                 return Json(new { success = true });
             }
             ViewBag.SubjectId = new SelectList(_oSubjectService.GetAll(sort: "Name"), "Id", "Name");
