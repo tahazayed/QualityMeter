@@ -121,7 +121,7 @@ namespace QualityMeter.Web.Controllers
             }
             return View(application);
         }
-        // GET: Applications/Details/5
+
         public ActionResult DetailsReport(Guid? id)
         {
             if (id == null)
@@ -148,6 +148,31 @@ namespace QualityMeter.Web.Controllers
             return View(lstApplicationEvaluation);
         }
 
+        public ActionResult CriteriaSummaryReport(Guid? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Application application = _oApplicationService.GetById(id.Value);
+            if (application == null)
+            {
+                return HttpNotFound();
+            }
+            var lstApplicationEvaluation =
+                _oApplicationEvaluationService.GetAll().Where(x => x.ApplicationId == id.Value);
+            float SumQualityValue = 0, SumUserValue = 0;
+            foreach (var applicationEvaluation in lstApplicationEvaluation)
+            {
+                SumQualityValue += applicationEvaluation.QualityValue;
+                SumUserValue += applicationEvaluation.UserValue;
+
+            }
+            ViewBag.ApplicationName = application.Name;
+            ViewBag.Customer = application.Customer;
+            ViewBag.QualityPercentage = Math.Round(SumQualityValue * 100 / SumUserValue, 2);
+            return View(lstApplicationEvaluation);
+        }
         // POST: Applications/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]

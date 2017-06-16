@@ -1,0 +1,51 @@
+﻿@model IEnumerable<QualityMeter.Core.Models.ApplicationEvaluation>
+
+@{
+    ViewBag.Title = "Criteria Summary Report";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/Content/print.css" rel="stylesheet" media="print" />
+
+<h2>Criteria Summary Report</h2>
+<h4>
+    Application: @ViewBag.ApplicationName
+</h4>
+<h4>
+    Customer: @ViewBag.Customer
+</h4>
+
+<h4>
+    Criterias:
+</h4>
+@foreach (var group in Model.GroupBy(item => item.QualityAttributesMetric.Criteria.Name))
+{
+    <li>
+        @Html.Encode(group.Key)
+        <ul>
+
+            @{
+                float SumQualityValue = 0, SumUserValue = 0;
+                foreach (var item in group)
+                {
+                    SumQualityValue += item.QualityValue;
+                    SumUserValue += item.UserValue;
+
+
+                }
+            }
+            % @(Math.Round(SumQualityValue / SumUserValue * 100, 2))
+        </ul>
+    </li>
+}
+
+<br />
+<hr />
+<P align="right">
+    Quality Percentage:  % @ViewBag.QualityPercentage
+</P>
+<p>
+    <a href="javascript:window.print();" class="btn btn-default noprint">Print</a>
+</p>
+<div class="noprint">
+    @Html.ActionLink("Back to List", "Index")
+</div>
