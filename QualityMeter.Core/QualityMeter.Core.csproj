@@ -81,7 +81,6 @@
     <Compile Include="Models\Criteria.cs" />
     <Compile Include="Models\Factor.cs" />
     <Compile Include="Models\Role.cs" />
-    <Compile Include="Models\RoleGroup.cs" />
     <Compile Include="Models\Subject.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\UserRole.cs" />
